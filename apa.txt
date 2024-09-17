@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>APA Serra da Ibiapaba WebGIS</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map { height: 100vh; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([-3.5, -41], 10); // Coordenadas da APA Serra da Ibiapaba
+
+        // Adicionando uma camada base (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        // Adicionando uma camada do GeoServer
+        var wmsLayer = L.tileLayer.wms('http://seu-geoserver-url/wms', {
+            layers: 'nome_da_camada',
+            format: 'image/png',
+            transparent: true,
+            attribution: "Dados da APA"
+        }).addTo(map);
+    </script>
+</body>
+</html>
